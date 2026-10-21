@@ -1,0 +1,41 @@
+# Site description for a real camera. All geometry is metric, in a ground-plane frame of
+# your choice (x, y in metres). The calibration pairs map image pixels to ground points
+# (>= 4, non-collinear; 8-12 well spread over the monitored area give robust fits). Ground
+# coordinates can come from lane-marking measurements, a survey, or an orthophoto.
+camera:
+  position_m: [-14.0, -8.0, 7.0]     # camera x, y and height above the road plane
+  image_size_px: [1920, 1080]
+
+calibration:
+  image_points_px:
+    - [412.0, 905.0]
+    - [1388.0, 921.0]
+    - [655.0, 640.0]
+    - [1204.0, 648.0]
+    - [790.0, 505.0]
+    - [1121.0, 509.0]
+  ground_points_m:
+    - [5.0, -1.75]
+    - [5.0, 5.25]
+    - [25.0, -1.75]
+    - [25.0, 5.25]
+    - [45.0, -1.75]
+    - [45.0, 5.25]
+
+lanes:
+  - lane_id: L0
+    stop_point_m: [0.0, 0.0]         # centre of the stop line
+    direction: [1.0, 0.0]            # unit vector, stop line -> upstream
+    width_m: 3.5
+    length_m: 100.0                  # monitored length measured from the stop line
+    approach_id: A                   # lanes of one approach must be parallel
+  - lane_id: L1
+    stop_point_m: [0.0, 3.5]
+    direction: [1.0, 0.0]
+    width_m: 3.5
+    length_m: 100.0
+    approach_id: A
+
+estimator:
+  anchor: front                      # bbox bottom-centre ~ bumper nearest the stop line
+  output_period_s: 1.0
