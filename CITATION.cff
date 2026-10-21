@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "occlusion-aware-queue-estimation"
+type: software
+version: 0.1.0
+license: MIT
+authors:
+  - alias: "soheylfalahzade"
+repository-code: "https://github.com/soheylfalahzade/occlusion-aware-queue-estimation"
+keywords:
+  - intelligent transportation systems
+  - queue estimation
+  - traffic signal control
