@@ -1,0 +1,258 @@
+{
+  "package_version": "0.1.0",
+  "python": "3.12.3",
+  "numpy": "2.4.4",
+  "pandas": "3.0.2",
+  "elapsed_s": 538.8,
+  "specs": [
+    {
+      "name": "h10_t5_s0",
+      "seed": 0,
+      "camera_height_m": 10.0,
+      "truck_fraction": 0.05,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h10_t5_s1",
+      "seed": 1,
+      "camera_height_m": 10.0,
+      "truck_fraction": 0.05,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h10_t5_s2",
+      "seed": 2,
+      "camera_height_m": 10.0,
+      "truck_fraction": 0.05,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h10_t30_s0",
+      "seed": 0,
+      "camera_height_m": 10.0,
+      "truck_fraction": 0.3,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h10_t30_s1",
+      "seed": 1,
+      "camera_height_m": 10.0,
+      "truck_fraction": 0.3,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h10_t30_s2",
+      "seed": 2,
+      "camera_height_m": 10.0,
+      "truck_fraction": 0.3,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h6_t5_s0",
+      "seed": 0,
+      "camera_height_m": 6.0,
+      "truck_fraction": 0.05,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h6_t5_s1",
+      "seed": 1,
+      "camera_height_m": 6.0,
+      "truck_fraction": 0.05,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h6_t5_s2",
+      "seed": 2,
+      "camera_height_m": 6.0,
+      "truck_fraction": 0.05,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h6_t30_s0",
+      "seed": 0,
+      "camera_height_m": 6.0,
+      "truck_fraction": 0.3,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h6_t30_s1",
+      "seed": 1,
+      "camera_height_m": 6.0,
+      "truck_fraction": 0.3,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h6_t30_s2",
+      "seed": 2,
+      "camera_height_m": 6.0,
+      "truck_fraction": 0.3,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h4_t5_s0",
+      "seed": 0,
+      "camera_height_m": 4.0,
+      "truck_fraction": 0.05,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h4_t5_s1",
+      "seed": 1,
+      "camera_height_m": 4.0,
+      "truck_fraction": 0.05,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h4_t5_s2",
+      "seed": 2,
+      "camera_height_m": 4.0,
+      "truck_fraction": 0.05,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h4_t30_s0",
+      "seed": 0,
+      "camera_height_m": 4.0,
+      "truck_fraction": 0.3,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h4_t30_s1",
+      "seed": 1,
+      "camera_height_m": 4.0,
+      "truck_fraction": 0.3,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    },
+    {
+      "name": "h4_t30_s2",
+      "seed": 2,
+      "camera_height_m": 4.0,
+      "truck_fraction": 0.3,
+      "demand_vph": 500.0,
+      "duration_s": 400.0
+    }
+  ],
+  "estimator_defaults": {
+    "output_period_s": 1.0,
+    "track_ttl_s": 0.6,
+    "ghost_ttl_s": 12.0,
+    "dedup_radius_m": 3.0,
+    "lane_tol_m": 0.6,
+    "anchor": "front",
+    "kin_window_s": 2.0,
+    "kin_min_history_s": 1.0,
+    "v_stop_mps": 1.0,
+    "v_go_mps": 2.0,
+    "gap_max_m": 8.0,
+    "head_tol_m": 8.0,
+    "mean_vehicle_length_m": 4.8,
+    "standstill_gap_m": 2.0,
+    "tail_lookahead_m": 30.0,
+    "tail_continue_prob": 0.1,
+    "probe_height_m": 0.9,
+    "s_grid_step_m": 0.5,
+    "meas_sigma_m": 1.0,
+    "empty_sigma_m": 0.6,
+    "ghost_sigma_m": 1.5,
+    "process_accel_sigma": 4.0,
+    "count_process_sigma": 0.6,
+    "gate_chi2": 9.0,
+    "confidence_ref_std_m": 3.0,
+    "naive_count": false,
+    "use_gap_inference": true,
+    "use_tail_inference": true,
+    "use_ghosts": true,
+    "use_filter": true
+  },
+  "scene_defaults": {
+    "n_lanes": 3,
+    "lane_width_m": 3.5,
+    "lane_length_m": 100.0,
+    "spawn_s_m": 130.0,
+    "demand_vph": 500.0,
+    "lane_demand_factors": [
+      1.0,
+      0.8,
+      1.2
+    ],
+    "truck_fraction": 0.15,
+    "bus_fraction": 0.03,
+    "cycle_s": 90.0,
+    "green_s": 40.0,
+    "fps": 10.0,
+    "camera_height_m": 7.0,
+    "camera_x_m": -14.0,
+    "camera_y_m": -8.0,
+    "aim_xy_m": [
+      45.0,
+      3.5
+    ],
+    "image_size_px": [
+      1920,
+      1080
+    ],
+    "hfov_deg": 70.0,
+    "pixel_noise_px": 1.5,
+    "calibration_noise_px": 1.0,
+    "camera_position_noise_m": 0.3,
+    "detector_recall": 0.97,
+    "detect_f0": 0.3,
+    "detect_k": 10.0,
+    "detect_corr": 0.9,
+    "min_bbox_height_px": 22.0,
+    "id_switch_gap_s": 1.0,
+    "id_switch_prob": 0.5,
+    "seed": 0
+  },
+  "variants": {
+    "naive_count": {
+      "naive_count": true,
+      "use_filter": false,
+      "use_gap_inference": false,
+      "use_tail_inference": false,
+      "use_ghosts": false
+    },
+    "visible_chain": {
+      "use_filter": false,
+      "use_gap_inference": false,
+      "use_tail_inference": false,
+      "use_ghosts": false
+    },
+    "visible_chain+kf": {
+      "use_gap_inference": false,
+      "use_tail_inference": false,
+      "use_ghosts": false
+    },
+    "full-no_filter": {
+      "use_filter": false
+    },
+    "full-no_ghosts": {
+      "use_ghosts": false
+    },
+    "full-no_gap": {
+      "use_gap_inference": false
+    },
+    "full-no_tail": {
+      "use_tail_inference": false
+    },
+    "full": {}
+  }
+}
