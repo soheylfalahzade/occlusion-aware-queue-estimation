@@ -98,6 +98,10 @@ oaqe-sumo --sumocfg net.sumocfg --lanes edge_0 edge_1 edge_2 --camera-height 6
 oaqe-benchmark --seeds 3 --duration 400 --jobs 4 --out results/benchmark
 ```
 
+The repository ships a minimal SUMO scenario in `examples/sumo/` (two-lane approach with a
+fixed-time light, cars and trucks). To use your own network, copy its `.net.xml` next to a
+`.sumocfg` and pass the approach lane IDs (camera-near lane first).
+
 Site calibration (`configs/site_template.yaml`): camera position, >= 4 pixel/ground
 correspondences (lane markings, survey, or orthophoto), and lane geometry.
 
@@ -154,6 +158,20 @@ Full tables, ablations and the run manifest: [`docs/benchmark/`](docs/benchmark)
   site-specific calibration is done.
 - Errors under heavy occlusion remain large (about 17 m MAE). This is a hard regime, not a solved one.
 
+## SUMO co-simulation check
+
+`oaqe-sumo` reads vehicles from a running SUMO simulation through TraCI, renders them through the
+synthetic camera, and logs estimates next to SUMO's own queue statistics. One run on
+`examples/sumo` (two lanes, 6,000 s, camera height 7 m, single seed, first 120 s excluded,
+4,560 lane-ticks):
+
+| lane | queue MAE (m) | bias (m) | count MAE | 95% interval coverage | corr(count, SUMO halting) |
+|---|---|---|---|---|---|
+| app_E_0 | 1.89 | +0.53 | 0.26 | 0.87 | 0.85 |
+| app_E_1 | 3.13 | -0.67 | 0.39 | 0.74 | 0.84 |
+
+This is a single-seed integration check on a lightly occluded two-lane scene, not a benchmark.
+
 ## Limitations and scope
 
 - Quantitative results are **simulation-based**. The synthetic renderer is a controlled stand-in for
@@ -162,7 +180,7 @@ Full tables, ablations and the run manifest: [`docs/benchmark/`](docs/benchmark)
 - Localisation assumes a flat road plane and a bounding-box bottom that touches the road. When
   the lower part of a vehicle is occluded the footprint is biased upstream (not corrected).
 - Lanes of one approach must be parallel; the camera position must be known (measured or PnP).
-- The SUMO bridge (`oaqe-sumo`) is an integration utility and is not covered by the automated tests.
+- The SUMO bridge (`oaqe-sumo`) is an integration utility, validated by the single run above and not covered by the automated tests.
 
 ## Repository layout
 
@@ -177,6 +195,7 @@ src/oaqe/
   pressure.py      max-pressure and fuzzy-controller inputs
   detection.py     YOLO + ByteTrack adapter (optional)
   sim/             synthetic scene + renderer, SUMO bridge
+examples/sumo/   minimal SUMO scenario (net, routes, signal program)
   evaluation/      metrics, bootstrap statistics, benchmark runner
 tests/             geometry, occlusion, queue model, pipeline
 ```

@@ -1,0 +1,6 @@
+<edges>
+  <edge id="app_E" from="O_E" to="M_E" numLanes="2" speed="13.89"/>
+  <edge id="in_E" from="M_E" to="C" numLanes="2" speed="13.89"/>
+  <edge id="out_W" from="C" to="M_W" numLanes="2" speed="8.33"/>
+  <edge id="exit_W" from="M_W" to="O_W" numLanes="2" speed="8.33"/>
+</edges>

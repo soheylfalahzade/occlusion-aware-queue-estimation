@@ -1,0 +1,14 @@
+<configuration>
+  <input>
+    <net-file value="demo.net.xml"/>
+    <route-files value="demo.rou.xml"/>
+  </input>
+  <time>
+    <begin value="0"/>
+    <end value="3600"/>
+    <step-length value="0.1"/>
+  </time>
+  <report>
+    <no-warnings value="true"/>
+  </report>
+</configuration>

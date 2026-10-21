@@ -1,0 +1,7 @@
+<routes>
+  <vType id="car" vClass="passenger" length="4.5" accel="2.6" decel="4.5" sigma="0.5"/>
+  <vType id="truck" vClass="truck" length="8.0" accel="1.2" decel="4.0" sigma="0.5"/>
+  <route id="r_w" edges="app_E in_E out_W exit_W"/>
+  <flow id="cars" type="car" route="r_w" begin="0" end="3600" vehsPerHour="900" departLane="random" departSpeed="max"/>
+  <flow id="trucks" type="truck" route="r_w" begin="0" end="3600" vehsPerHour="250" departLane="random" departSpeed="max"/>
+</routes>
