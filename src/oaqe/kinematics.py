@@ -40,7 +40,8 @@ class TrackKinematics:
 
     def update(self, t: float, xy: ArrayLike, cls: str, lane_id: str | None) -> None:
         """Add an observation at time ``t`` (seconds) and refresh the motion state."""
-        self._hist.append((t, float(xy[0]), float(xy[1])))
+        p = np.asarray(xy, dtype=float)
+        self._hist.append((t, float(p[0]), float(p[1])))
         while self._hist and t - self._hist[0][0] > self.window_s:
             self._hist.popleft()
         self.cls, self.lane_id, self.last_seen = cls, lane_id, t

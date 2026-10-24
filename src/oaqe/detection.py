@@ -54,6 +54,7 @@ class YoloByteTrackDetector:
         cls = boxes.cls.cpu().numpy().astype(int)
         conf = boxes.conf.cpu().numpy()
         return [
-            Detection(int(i), COCO_VEHICLES.get(int(c), "car"), tuple(map(float, b)), float(s))
+            Detection(int(i), COCO_VEHICLES.get(int(c), "car"),
+                      (float(b[0]), float(b[1]), float(b[2]), float(b[3])), float(s))
             for i, c, b, s in zip(ids, cls, xyxy, conf, strict=True)
         ]

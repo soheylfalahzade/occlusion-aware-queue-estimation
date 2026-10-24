@@ -15,6 +15,7 @@ from collections import deque
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import asdict, dataclass, replace
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -29,7 +30,7 @@ LOG = logging.getLogger("oaqe.benchmark")
 WARMUP_S = 60.0
 
 _OFF = {"use_gap_inference": False, "use_tail_inference": False, "use_ghosts": False}
-VARIANTS: dict[str, dict[str, object]] = {
+VARIANTS: dict[str, dict[str, Any]] = {
     "naive_count": {"naive_count": True, "use_filter": False, **_OFF},
     "visible_chain": {"use_filter": False, **_OFF},
     "visible_chain+kf": dict(_OFF),
