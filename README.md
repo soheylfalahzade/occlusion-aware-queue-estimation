@@ -11,6 +11,17 @@ reasoning explicitly about what the camera *cannot* see.
 
 No detector is trained. The contribution is the estimation layer between perception and control.
 
+[![ci](https://github.com/soheylfalahzade/occlusion-aware-queue-estimation/actions/workflows/ci.yml/badge.svg)](https://github.com/soheylfalahzade/occlusion-aware-queue-estimation/actions)
+![python](https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12-blue)
+![license](https://img.shields.io/badge/license-MIT-green)
+![typing](https://img.shields.io/badge/mypy-checked-blue)
+
+<p align="center"><img src="docs/assets/pipeline.svg" alt="pipeline animation" width="100%"></p>
+
+<p align="center"><img src="docs/assets/queue.gif" alt="data-driven animation" width="90%"></p>
+
+<sub>Animation: a heavily occluded approach (camera 4 m high, 30% trucks). Green vehicles are detected, red are undetected; black tick = true queue end, blue = occlusion-aware estimate with 95% interval, orange = visible-chain baseline. Regenerate with `oaqe-gif`.</sub>
+
 ```mermaid
 flowchart LR
     A[Camera frames] --> B[Detector + tracker<br/>YOLO / ByteTrack]
@@ -171,6 +182,33 @@ synthetic camera, and logs estimates next to SUMO's own queue statistics. One ru
 | app_E_1 | 3.13 | -0.67 | 0.39 | 0.74 | 0.84 |
 
 This is a single-seed integration check on a lightly occluded two-lane scene, not a benchmark.
+
+## Claims and evidence
+
+| claim | evidence | file |
+|---|---|---|
+| Occlusion-aware inference reduces systematic under-estimation | bias -2.84 m (visible chain) to -0.63 m (full), 18 scenarios | `docs/benchmark/summary.md` |
+| Error under occlusion is lower than the visible-chain baseline | MAE 17.3 vs 28.3 m at occlusion 0.1-0.25; 15-39% lower across occluded bins | `docs/benchmark/occlusion_binned.csv` |
+| Overall MAE improves | **not supported**: paired difference CI includes zero | `docs/benchmark/summary.md` |
+| Intervals are calibrated | **not supported**: coverage about 0.74 against nominal 0.95 | `docs/benchmark/summary.csv` |
+| Lane-ranking decisions improve | top-1 0.715 to 0.777, regret 0.141 to 0.108 | `docs/benchmark/summary.csv` |
+
+## Threats to validity
+
+- *Construct*: detections come from a synthetic renderer with a stated miss model, not from a deployed detector.
+- *Internal*: defaults were tuned on development seeds from the same generator; the reference queue uses the same gap rule as the estimator, which couples definition and method.
+- *External*: one camera geometry family (side-mounted, three lanes) and one demand level; real cameras add lens, weather and tracker effects.
+- *Statistical*: 18 scenarios for bootstrap intervals; the SUMO check is a single seed.
+
+## Data and code availability
+
+All code, configuration, seeds and result files behind the figures and tables are in this repository.
+No external datasets are used. Formal definitions: [`docs/METHODS.md`](docs/METHODS.md); exact
+commands, seeds and runtimes: [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md).
+
+## Citation
+
+See [`CITATION.cff`](CITATION.cff).
 
 ## Limitations and scope
 
