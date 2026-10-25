@@ -25,8 +25,8 @@ class ConstantVelocityKalman:
         self._rate_var0 = rate_sigma0**2
         self._gate = gate_chi2
         self._lower, self._upper = lower, upper
-        self.x = np.zeros(2)
-        self.p = np.diag([1e2, self._rate_var0])
+        self.x: np.ndarray = np.zeros(2)
+        self.p: np.ndarray = np.diag([1e2, self._rate_var0])
 
     def reset(self, value: float, var: float) -> None:
         """(Re-)initialise the state at ``value`` with variance ``var``."""
