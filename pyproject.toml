@@ -26,6 +26,7 @@ dev = ["pytest>=7.4", "pytest-cov>=4.1", "ruff>=0.4", "mypy>=1.8"]
 [project.scripts]
 oaqe-benchmark = "oaqe.evaluation.benchmark:main"
 oaqe-video = "oaqe.cli:main_video"
+oaqe-score = "oaqe.cli:main_score"
 oaqe-sumo = "oaqe.sim.sumo_bridge:main"
 oaqe-gif = "oaqe.viz:main"
 

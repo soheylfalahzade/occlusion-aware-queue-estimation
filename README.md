@@ -224,6 +224,21 @@ See [`CITATION.cff`](CITATION.cff).
 - Lanes of one approach must be parallel; the camera position must be known (measured or PnP).
 - The SUMO bridge (`oaqe-sumo`) is an integration utility, validated by the single run above and not covered by the automated tests.
 
+## Scoring real footage
+
+The synthetic benchmark has exact ground truth; real footage does not. `oaqe-score` compares the output of
+`oaqe-video` with manually labelled queue lengths (for example read off a calibrated frame at a few hundred
+instants):
+
+```bash
+oaqe-video --config configs/site.yaml --video traffic.mp4 --out results/video_estimates.csv
+# labels.csv columns: timestamp_s, lane_id, queue_length_m
+oaqe-score --estimates results/video_estimates.csv --labels labels.csv --out results/real_score.json
+```
+
+Each label is matched to the nearest estimate of the same lane within `--tol-s` seconds; the output is the MAE
+with a bootstrap interval, the bias and the empirical coverage of the 95% interval.
+
 ## Repository layout
 
 ```

@@ -53,3 +53,58 @@ def main_video(argv: list[str] | None = None) -> int:
             n += 1
     LOG.info("processed %d frames at %.2f fps -> %s", n, fps, args.out)
     return 0
+
+
+def score_against_labels(estimates_csv: str, labels_csv: str, tol_s: float = 1.0,
+                         n_boot: int = 2000, seed: int = 0) -> dict[str, float | int]:
+    """Compare video estimates with manual labels (the only way to score real footage).
+
+    ``labels_csv`` has columns ``timestamp_s, lane_id, queue_length_m`` (and optionally
+    ``vehicle_count``). Each label is matched to the nearest estimate of the same lane within
+    ``tol_s`` seconds. Returns MAE, bias and 95% interval coverage with bootstrap intervals over
+    labelled instants.
+    """
+    import numpy as np
+    import pandas as pd
+
+    est = pd.read_csv(estimates_csv)
+    lab = pd.read_csv(labels_csv)
+    rows = []
+    for _, r in lab.iterrows():
+        e = est[est["lane_id"].astype(str) == str(r["lane_id"])]
+        if e.empty:
+            continue
+        k = (e["timestamp_s"] - r["timestamp_s"]).abs().idxmin()
+        if abs(e.loc[k, "timestamp_s"] - r["timestamp_s"]) > tol_s:
+            continue
+        rows.append((float(e.loc[k, "queue_length_m"]) - float(r["queue_length_m"]),
+                     float(e.loc[k, "queue_ci95_lo_m"] <= r["queue_length_m"]
+                           <= e.loc[k, "queue_ci95_hi_m"])))
+    if not rows:
+        raise SystemExit("no label could be matched to an estimate (check lane_id / timestamps)")
+    err = np.array([x[0] for x in rows])
+    cov = np.array([x[1] for x in rows])
+    rng = np.random.default_rng(seed)
+    idx = rng.integers(len(err), size=(n_boot, len(err)))
+    mae = np.abs(err[idx]).mean(axis=1)
+    return {"n_matched": len(err), "n_labels": int(len(lab)), "mae_m": float(np.abs(err).mean()),
+            "mae_ci95_lo": float(np.quantile(mae, 0.025)),
+            "mae_ci95_hi": float(np.quantile(mae, 0.975)), "bias_m": float(err.mean()),
+            "coverage95": float(cov.mean())}
+
+
+def main_score(argv: list[str] | None = None) -> int:
+    """Score ``oaqe-video`` output against manually labelled queue lengths."""
+    import json
+
+    ap = argparse.ArgumentParser(description=main_score.__doc__)
+    ap.add_argument("--estimates", required=True)
+    ap.add_argument("--labels", required=True)
+    ap.add_argument("--tol-s", type=float, default=1.0)
+    ap.add_argument("--out", default=None)
+    args = ap.parse_args(argv)
+    res = score_against_labels(args.estimates, args.labels, args.tol_s)
+    print(json.dumps(res, indent=1))
+    if args.out:
+        Path(args.out).write_text(json.dumps(res, indent=1), encoding="utf-8")
+    return 0
