@@ -1,5 +1,9 @@
 # occlusion-aware-queue-estimation
 
+<!-- banner -->
+<p align="center"><img src="docs/assets/banner.svg" alt="occlusion-aware-queue-estimation" width="860"></p>
+
+
 **Occlusion-aware, lane-level queue and max-pressure estimation from oblique roadside cameras.**
 
 Adaptive signal controllers (max-pressure, fuzzy, RL) assume that per-lane queue lengths are
