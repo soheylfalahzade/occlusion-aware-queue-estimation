@@ -27,6 +27,7 @@ dev = ["pytest>=7.4", "pytest-cov>=4.1", "ruff>=0.4", "mypy>=1.8"]
 oaqe-benchmark = "oaqe.evaluation.benchmark:main"
 oaqe-video = "oaqe.cli:main_video"
 oaqe-score = "oaqe.cli:main_score"
+oaqe-label-frames = "oaqe.labeling:main_label_frames"
 oaqe-sumo = "oaqe.sim.sumo_bridge:main"
 oaqe-gif = "oaqe.viz:main"
 

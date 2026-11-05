@@ -2,6 +2,10 @@
 
 All notable changes are documented here (Keep a Changelog, semantic versioning).
 
+## [Unreleased]
+
+- `oaqe-label-frames` (`oaqe.labeling`): frames with distance ticks from the calibration, an empty label template and `--finalize`; `docs/REAL_VIDEO.md`.
+
 ## [0.1.0]
 
 ### Added

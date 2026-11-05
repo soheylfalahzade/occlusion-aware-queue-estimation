@@ -239,6 +239,9 @@ oaqe-score --estimates results/video_estimates.csv --labels labels.csv --out res
 Each label is matched to the nearest estimate of the same lane within `--tol-s` seconds; the output is the MAE
 with a bootstrap interval, the bias and the empirical coverage of the 95% interval.
 
+The full procedure (calibration, frames with distance ticks to label, label template) is in
+[`docs/REAL_VIDEO.md`](docs/REAL_VIDEO.md); `oaqe-label-frames` produces the frames and the template.
+
 ## Repository layout
 
 ```
